@@ -1,28 +1,31 @@
 {
-  "name": "n8n-nodes-<...>",
+  "name": "n8n-nodes-storage-kv",
   "version": "0.1.0",
-  "description": "",
+  "description": "A key-value storage node for n8n workflows to save and read data across executions.",
   "keywords": [
-    "n8n-community-node-package"
+    "n8n-community-node-package",
+    "n8n-storage",
+    "key-value",
+    "persistent-storage"
   ],
   "license": "MIT",
-  "homepage": "",
+  "homepage": "https://github.com/joey-barbier/n8n-nodes-storage-kv",
   "author": {
-    "name": "",
-    "email": ""
+    "name": "Joey Barbier",
+    "email": "joey@orka.pw"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/<...>/n8n-nodes-<...>.git"
+    "url": "https://github.com/joey-barbier/n8n-nodes-storage-kv.git"
   },
-  "main": "index.js",
+  "main": "dist/nodes/StorageKv/StorageKv.node.js",
   "scripts": {
     "build": "tsc && gulp build:icons",
     "dev": "tsc --watch",
-    "format": "prettier nodes credentials --write",
-    "lint": "eslint nodes credentials package.json",
-    "lintfix": "eslint nodes credentials package.json --fix",
-    "prepublishOnly": "npm run build && npm run lint -c .eslintrc.prepublish.js nodes credentials package.json"
+    "format": "prettier --write \"nodes/**/*.ts\" \"credentials/**/*.ts\"",
+    "lint": "eslint --ext .ts nodes/ credentials/",
+    "lintfix": "eslint --fix --ext .ts nodes/ credentials/",
+    "prepublishOnly": "npm run build && npm run lint -c .eslintrc.prepublish.js"
   },
   "files": [
     "dist"
@@ -30,23 +33,22 @@
   "n8n": {
     "n8nNodesApiVersion": 1,
     "credentials": [
-      "dist/credentials/ExampleCredentialsApi.credentials.js",
-      "dist/credentials/HttpBinApi.credentials.js"
     ],
     "nodes": [
-      "dist/nodes/ExampleNode/ExampleNode.node.js",
-      "dist/nodes/HttpBin/HttpBin.node.js"
+      "dist/nodes/KeyValueStorage/KeyValueStorage.node.js"
     ]
   },
   "devDependencies": {
     "@types/express": "^4.17.6",
-    "@types/request-promise-native": "~1.0.15",
-    "@typescript-eslint/parser": "~5.45",
+    "@types/node": "^16.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "eslint": "^8.0.0",
     "eslint-plugin-n8n-nodes-base": "^1.11.0",
     "gulp": "^4.0.2",
     "n8n-core": "*",
     "n8n-workflow": "*",
     "prettier": "^2.7.1",
-    "typescript": "~4.8.4"
+    "typescript": "^4.8.4"
   }
 }
